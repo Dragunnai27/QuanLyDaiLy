@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">Phiếu xuất hàng</h2>
+
+<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#myModal">
+    Thêm phiếu xuất hàng
+</button>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm phiếu xuất hàng</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="~/PhieuXuat/AddPhieuXuat" method="post">
+
+                    @if (ViewBag.ListHoSo.Count > 0)
+                    {
+                        <div class="form-group">
+                            <label>Hồ sơ đại lý</label>
+                            <select class="form-control" name="MaHSDL">
+                                @foreach (var item in ViewBag.ListHoSo)
+                                {
+                                    <option value=@item.MaHSDL>@item.MaHSDL</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ngày lập phiếu</label>
+                            <input type="date" class="form-control" name="NgayLapPhieu">
+                        </div>
+
+                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Trở lại</button>
+                            <button type="submit" class="btn btn-primary">Thêm phiếu thu</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-danger">Chưa có Hồ sơ đại lý</p>
+                    }
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------------------------------------------------- Danh sách phiếu xuất hàng ---------------------------------------------------->
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã hồ sơ</th>
+                <th>Ngày lập phiếu</th>
+                <th>Tổng tiền</th>
+                <th>Số tiền trả</th>
+                <th>Còn lại</th>
+                <th>Xem thông tin</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.ListPhieuXuat != null)
+            {
+                foreach (var item in ViewBag.ListPhieuXuat)
+                {
+                    <tr>
+                        <td>@item.MaHSDL</td>
+                        <td>@item.NgayLapPhieu</td>
+                        <td>@item.TongTien</td>
+                        <td>@item.SoTienTra</td>
+                        <td>@item.ConLai</td>
+
+                        <td>
+                            <form action="~/PhieuXuat/PhieuXuatDetail/@item.MaPXH">
+                                <button class="btn btn-primary" type="submit">Xem thông tin</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,66 @@
+﻿@model QuanLyDaiLy.Models.HoSoDaiLy
+@{
+    ViewBag.Title = "BCCongNo";
+    Layout = null;
+}
+@{
+    int stt = 1;
+}
+
+<head>
+    <!-- Bootstrap 4-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <h3 align="center" class="m-4">BÁO CÁO CÔNG NỢ THÁNG @ViewBag.Thang</h3>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Đại lý</th>
+                    <th scope="col">Nợ đầu</th>
+                    <th scope="col">Phát sinh</th>
+                    <th scope="col">Nợ cuối</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (ViewBag.ListHoSo != null)
+                {
+                    float sum = 0;
+                    foreach (var item in ViewBag.ListHoSo)
+                    {
+                        sum = item.TienNo;
+                        <tr>
+                            <th scope="row">@stt</th>
+                            <td>@item.Ten</td>
+                            <td>@item.TienNo</td>
+                            <td>0</td>
+                            <td>@sum</td>
+                        </tr>
+                        stt++;
+                    }
+                }
+
+            </tbody>
+        </table>
+
+        <!--Tổng tiền -->
+        <h5 class="m-3 b">Tổng tiền nợ : @ViewBag.TongTienNo</h5>
+
+    </div>
+</body>
+
+

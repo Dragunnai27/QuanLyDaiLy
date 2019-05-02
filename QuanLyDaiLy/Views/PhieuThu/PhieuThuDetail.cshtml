@@ -1,0 +1,77 @@
+﻿@model QuanLyDaiLy.Models.PhieuThuTien
+@{
+    ViewBag.Title = "PhieuThuDetail";
+}
+
+<h2 align="center">Chi tiết phiếu thu</h2>
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Thông tin</th>
+                <th>Chi tiết thông tin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Mã phiếu thu tiền</th>
+                <td>@Model.MaPTT</td>
+            </tr>
+            <tr>
+                <th>Mã hồ sơ đại lý</th>
+                <td>@Model.MaHSDL</td>
+            </tr>
+            <tr>
+                <th>Số tiền thu</th>
+                <td>@Model.SoTienThu</td>
+            </tr>
+            <tr>
+                <th>Ngày thu tiền</th>
+                <td>@Model.NgayThuTien</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row">
+
+    <form action="~/PhieuThu">
+        <button class="btn btn-primary m-1 " type="submit">Trở lại</button>
+    </form>
+
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#myModal">
+        Xóa phiếu thu tiền
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa phiếu thu tiền @Model.MaHSDL</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa ?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Không</button>
+                    <form action="~/PhieuThu/DeletePhieuThu/@Model.MaPTT">
+                        <button class="btn btn-danger" type="submit">Có</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

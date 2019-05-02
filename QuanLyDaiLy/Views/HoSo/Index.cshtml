@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">Hồ sơ đại lý</h2>
+
+<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#myModal">
+    Thêm hồ sơ
+</button>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm hồ sơ đại lý</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="~/HoSo/AddHoSo" method="post">
+
+                    <div class="form-group">
+                        <label>Mã Hồ sơ</label>
+                        <input type="text" class="form-control" name="MaHSDL">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quận</label>
+                        <select class="form-control" name="MaQuan">
+                            @foreach (var item in ViewBag.ListQuan)
+                            {
+                                <option value=@item.MaQuan>@item.TenQuan</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Loại đại lý</label>
+                        <select class="form-control" name="MaLDL">
+                            @foreach (var item in ViewBag.ListLDL)
+                            {
+                                <option value=@item.MaLDL>@item.TenLDL</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tên Hồ sơ</label>
+                        <input type="text" class="form-control" id="Ten" name="Ten">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="number" class="form-control" name="SDT">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" name="DiaChi">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tiền nợ</label>
+                        <input type="number" class="form-control" name="TienNo">
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Trở lại</button>
+                        <button type="submit" class="btn btn-primary">Thêm hồ sơ</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------------------------------------------------- Danh sách hồ sơ ---------------------------------------------------->
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã hồ sơ</th>
+                <th>Quận</th>
+                <th>Loại đại lý</th>
+                <th>Tiền nợ</th>
+                <th>Ngày tiếp nhận</th>
+                <th>Xem chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.ListHSDL != null)
+            {
+                foreach (var item in ViewBag.ListHSDL)
+                {
+                    <tr>
+                        <td>@item.MaHSDL</td>
+                        <td>@item.FKQuan.TenQuan</td>
+                        <td>@item.FKLoaiDaiLy.TenLDL</td>
+                        <td>@item.TienNo</td>
+                        <td>@item.NgayTiepNhan</td>
+
+                        <td>
+                            <form action="~/HoSo/HoSoDetail/@item.MaHSDL">
+                                <button class="btn btn-primary" type="submit">Chi tiết</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

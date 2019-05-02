@@ -1,0 +1,183 @@
+﻿@model QuanLyDaiLy.Models.PhieuXuatHang
+@{
+    ViewBag.Title = "PhieuXuatDetail";
+}
+
+<h2 align="center" class="m-4">Thông tin phiếu xuất hàng xuất hàng</h2>
+
+<div class="row">
+    <table class="table table-bordered">
+
+        <thead class="thead-light">
+            <tr>
+                <th>Thông tin</th>
+                <th>Chi tiết thông tin</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Mã phiếu xuất hàng</th>
+                <td>@Model.MaPXH</td>
+            </tr>
+            <tr>
+                <th>Mã hồ sơ đại lý</th>
+                <td>@Model.MaHSDL</td>
+            </tr>
+            <tr>
+                <th>Ngày lập phiếu</th>
+                <td>@Model.NgayLapPhieu</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr class="table-success">
+                <th>Tổng tiền</th>
+                <td>@Model.TongTien</td>
+            </tr>
+            <tr>
+                <th>Số tiền trả</th>
+                <td>@Model.SoTienTra</td>
+            </tr>
+            <tr>
+                <th>Còn lại</th>
+                <td>@Model.ConLai</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<!--- Nút trở lại - Xóa ------------------------------------------------------------------------------------------->
+<div class="row">
+    <form action="/PhieuXuat">
+        <button class="btn btn-primary m-1 " type="submit">Trở lại</button>
+    </form>
+
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#myModal">
+        Xóa phiếu xuất
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa phiếu xuất hàng @Model.MaPXH</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa ?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Không</button>
+                    <form action="~/PhieuXuat/DeletePhieuXuat/@Model.MaPXH">
+                        <button class="btn btn-danger" type="submit">Có</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--- Thêm chi tiết ------------------------------------------------------------------------------------------->
+<h2 align="center" class="m-4">Chi tiết phiếu xuất hàng</h2>
+
+<!--Form thêm chi tiết-->
+<div class="row">
+    <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#AddCTPXH">
+        Thêm chi tiết phiếu xuất
+    </button>
+
+    <div class="modal fade" id="AddCTPXH">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm chi tiết phiếu xuất hàng @Model.MaPXH</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="~/PhieuXuat/AddChiTietPhieuXuat" method="post">
+                        <input type="hidden" name="MaPXH" value=@Model.MaPXH>
+
+                        <div class="form-group">
+                            <label>Mặt hàng - đơn giá</label>
+                            <select class="form-control" name="MaMH">
+                                @foreach (var item in ViewBag.ListMH)
+                                {
+                                    <option value=@item.MaMH>@item.TenMH - @item.DonGia</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Đơn vị tính</label>
+                            <select class="form-control" name="MaDVT">
+                                @foreach (var item in ViewBag.ListDVT)
+                                {
+                                    <option value=@item.MaDVT>@item.TenDVT</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Số lượng</label>
+                            <input type="number" class="form-control" name="SoLuong">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Trở lại</button>
+                            <button type="submit" class="btn btn-primary">Thêm phiếu thu</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Danh sách chi tiết PXH-->
+<div class="row"> 
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mặt hàng</th>
+                <th>Đơn vị tính</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Xóa chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.ListCTPXH != null)
+            {
+                foreach (var item in ViewBag.ListCTPXH)
+                {
+                    <tr>
+                        <td>@item.FKMatHang.TenMH</td>
+                        <td>@item.FKDonViTinh.TenDVT</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.ThanhTien</td>
+
+                        <td>
+                            <form action="~/PhieuXuat/PhieuXuatDetail/@item.MaPXH">
+                                <button class="btn btn-danger" type="submit">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

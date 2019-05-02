@@ -1,0 +1,95 @@
+﻿@model QuanLyDaiLy.Models.HoSoDaiLy
+
+@{
+    ViewBag.Title = "HoSoDetail";
+}
+
+<h2 align="center">Chi tiết hồ sơ</h2>
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Thông tin</th>
+                <th>Chi tiết thông tin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Mã hồ sơ</th>
+                <td>@Model.MaHSDL</td>
+            </tr>
+            <tr>
+                <th>Quận</th>
+                <td>@Model.FKQuan.TenQuan</td>
+            </tr>
+            <tr>
+                <th>Loại đại lý</th>
+                <td>@Model.FKLoaiDaiLy.TenLDL</td>
+            </tr>
+            <tr>
+                <th>Số điện thoại</th>
+                <td>@Model.SDT</td>
+            </tr>
+            <tr>
+                <th>Địa chỉ</th>
+                <td>@Model.DiaChi</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <th>Số tiền nợ</th>
+                <td>@Model.TienNo</td>
+            </tr>
+            <tr>
+                <th>Ngày tiếp nhận</th>
+                <td>@Model.NgayTiepNhan</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <form action="~/HoSo">
+        <button class="btn btn-primary m-1 " type="submit">Trở lại</button>
+    </form>
+
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#myModal">
+        Xóa hồ sơ
+    </button>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa hồ sơ @Model.MaHSDL</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Không</button>
+                    <form action="~/HoSo/DeleteHoSo/@Model.MaHSDL">
+                        <button class="btn btn-danger" type="submit">Có</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

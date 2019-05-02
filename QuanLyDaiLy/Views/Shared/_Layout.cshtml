@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <!-- Bootstrap 4-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="~/Home">Quản lý đại lý</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            @*<li class="nav-item">
+                <a class="nav-link" href="~/Dont">Link 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+            </li>*@
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Chức năng
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/HoSo">Hồ sơ đại lý</a>
+                    <a class="dropdown-item" href="/PhieuThu">Phiếu thu tiền</a>
+                    <a class="dropdown-item" href="/PhieuXuat">Phiếu xuất hàng</a>
+                    <a class="dropdown-item" href="/BaoCao">Báo cáo</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>Website Quản lý đại lý - Công nghệ phần mềm nâng cao 2019</p>
+        </footer>
+    </div>
+</body>
+</html>

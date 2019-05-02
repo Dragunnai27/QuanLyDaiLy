@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "BCDoanhSo";
+    Layout = null;
+}
+@{
+    int stt = 1;
+}
+
+<head>
+    <!-- Bootstrap 4-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <h3 align="center" class="m-4">BÁO CÁO CÔNG DOANH SỐ THÁNG @ViewBag.Thang</h3>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Đại lý</th>
+                    <th scope="col">Số phiếu xuất</th>
+                    <th scope="col">Tổng giá trị</th>
+                    <th scope="col">Tỉ lệ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (ViewBag.ListBCDS != null)
+                {
+                    foreach (var item in ViewBag.ListBCDS)
+                    {
+                        <tr>
+                            <th scope="row">@stt</th>
+                            <td>@item.DaiLy</td>
+                            <td>@item.SoPhieuXuat</td>
+                            <td>@item.TongGiaTri</td>
+                            <td>@item.TiLe</td>
+                        </tr>
+                        stt++;
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
